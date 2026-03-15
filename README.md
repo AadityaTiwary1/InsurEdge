@@ -242,13 +242,13 @@ Users can view:
 ### Frontend
 
 Mobile Application
-Flutter or React Native
+Flutter 
 
 ---
 
 ### Backend
 
-FastAPI or Node.js
+FastAPI
 REST API architecture
 
 ---
@@ -278,7 +278,7 @@ PostgreSQL or Supabase
 
 ### Payment Simulation
 
-Razorpay Sandbox
+Razorpay Sandbox / 
 Stripe Test Mode
 
 ---
