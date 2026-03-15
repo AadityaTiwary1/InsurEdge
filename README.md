@@ -1,4 +1,4 @@
-# InsurEdge – AI Powered Insurance for Gig Workers
+# InsurEdge – AI Powered Parametric Insurance for Gig Workers
 
 ## Overview
 
