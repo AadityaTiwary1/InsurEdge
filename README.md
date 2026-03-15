@@ -285,21 +285,9 @@ Stripe Test Mode
 
 ## System Architecture
 
-```
-Mobile App (Flutter / React Native)
-        |
-Backend API (FastAPI / Node)
-        |
-------------------------------------------------
-|            |             |                    |
-Risk AI    Fraud AI   Parametric Engine   Database
-Model       Model         Trigger System
-------------------------------------------------
-        |
-External APIs (Weather / AQI / Traffic)
-        |
-Payment Gateway (Mock)
-```
+<p align="center">
+  <img src="System_Architecture.png" width="750"/>
+</p>
 
 ---
 
