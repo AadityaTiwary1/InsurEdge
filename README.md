@@ -302,8 +302,6 @@ Stripe Test Mode
 * Create workflow documentation
 * Design prototype user interface
 
-Deliverables include a README document and a prototype demonstration video.
-
 ---
 
 ### Phase 2 – MVP Development
@@ -329,15 +327,3 @@ The final stage will include:
 
 ---
 
-## Innovation Highlights
-
-InsurEdge introduces an automated parametric insurance system tailored specifically for gig workers.
-
-Key innovations include:
-
-* AI-driven dynamic premium calculation
-* Automated claim settlement without manual intervention
-* Real-time disruption monitoring
-* Simple mobile-first user experience
-
-The goal is to provide gig workers with a reliable financial safety net while simplifying the insurance process through automation and AI.
