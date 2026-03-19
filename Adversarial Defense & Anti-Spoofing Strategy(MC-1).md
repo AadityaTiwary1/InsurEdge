@@ -182,5 +182,4 @@ And that is how it answers the core question:
 
 > How do you differentiate between a fraudster and a genuinely stranded worker?
 
-By not relying on a single signal —
-but by combining **data, behavior, and intelligence into one unified decision system**.
+By not relying on a single signal but by combining **data, behavior, and intelligence into one unified decision system**.
