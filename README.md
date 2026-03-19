@@ -327,6 +327,8 @@ The final stage will include:
 
 ---
 
+## MARKET CRASH - 1
+
 ## Adversarial Defense & Anti-Spoofing Strategy
 
 ### The Market Crash Scenario
