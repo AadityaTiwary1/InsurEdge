@@ -495,6 +495,13 @@ Over time:
 * Fraudsters encounter increasing resistance
 
 ---
+## Flow of Steps
+
+<p align="center">
+  <img src="Market_Crash-1.png" width="750"/>
+</p>
+
+---
 
 ### Final Outcome
 
