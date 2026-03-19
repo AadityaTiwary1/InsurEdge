@@ -28,14 +28,13 @@ InsurEdge does not.
 
 Instead of relying on a single signal, we build a **multi-source location verification system**:
 
-* GPS coordinates
 * Network location (cell tower / IP)
 * Device fingerprint
 * Historical movement patterns
 
 When a rider claims to be in a specific location, all signals must align within a defined threshold.
 
-If GPS shows Mumbai but network data indicates otherwise → **a flag is raised instantly**.
+If Server <-> Client shows Mumbai but network data indicates otherwise → **a flag is raised instantly**.
 
 ---
 
