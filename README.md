@@ -1,3 +1,5 @@
+# MARKET CRASH SEPERATE Adversarial Defense & Anti-Spoofing Strategy(MC-1).md CREATED.
+
 # InsurEdge – AI Powered Parametric Insurance for Gig Workers
 
 ## Overview
