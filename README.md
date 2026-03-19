@@ -1,4 +1,4 @@
-# MARKET CRASH DISCUSSED AT END.
+# MARKET CRASH DISCUSSED AT THE END.
 
 # InsurEdge – AI Powered Parametric Insurance for Gig Workers
 
