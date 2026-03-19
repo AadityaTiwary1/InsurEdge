@@ -1,4 +1,4 @@
-# MARKET CRASH SEPERATE (.md) CREATED.
+# MARKET CRASH SEPERATELY (.md) CREATED.
 
 # InsurEdge – AI Powered Parametric Insurance for Gig Workers
 
