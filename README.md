@@ -1,4 +1,4 @@
-# InsurEdge 🛵⚡
+# InsurEdge 
 ### AI-Powered Parametric Micro-Insurance for Gig Workers
 
 > Protecting delivery riders from income loss caused by disruptions they never saw coming — and never caused.
