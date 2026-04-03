@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InsurEdge | AI Insurance for Gig Workers</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #1e1b4b, #0f172a);
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+      opacity: 0.35;
+      animation: floatGlow 10s infinite alternate ease-in-out;
+    }
+
+    body::before {
+      background: #38bdf8;
+      top: -80px;
+      left: -80px;
+    }
+
+    body::after {
+      background: #8b5cf6;
+      bottom: -100px;
+      right: -100px;
+      animation-delay: 2s;
+    }
+
+    @keyframes floatGlow {
+      from { transform: translateY(0px) translateX(0px) scale(1); }
+      to { transform: translateY(40px) translateX(20px) scale(1.1); }
+    }
+
+    nav {
+      width: 100%;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(15, 23, 42, 0.45);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #38bdf8, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #38bdf8;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 8% 50px;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      animation: fadeUp 1s ease;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #38bdf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: auto;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 26px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+      color: white;
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 14px 35px rgba(56, 189, 248, 0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.14);
+    }
+
+    .section {
+      padding: 80px 8%;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #cbd5e1;
+      max-width: 800px;
+      margin: auto;
+      margin-bottom: 45px;
+      line-height: 1.8;
+    }
+
+    .glass-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 26px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.22);
+      transition: 0.35s ease;
+      animation: fadeUp 0.9s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .glass-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.25rem;
+      color: #ffffff;
+    }
+
+    .glass-card p {
+      color: #cbd5e1;
+      line-height: 1.8;
+      font-size: 0.97rem;
+    }
+
+    .link-box a {
+      color: #7dd3fc;
+      text-decoration: none;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .link-box a:hover {
+      text-decoration: underline;
+    }
+
+    .summary-box {
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+      font-size: 1.02rem;
+      line-height: 1.95;
+      color: #dbeafe;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-top: 30px;
+    }
+
+    .chart-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 24px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.22);
+      min-height: 380px;
+    }
+
+    .chart-card h3 {
+      text-align: center;
+      margin-bottom: 18px;
+      color: #f8fafc;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 290px !important;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px 8%;
+      color: #cbd5e1;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(15, 23, 42, 0.35);
+      backdrop-filter: blur(10px);
+      margin-top: 40px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding-top: 60px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 0.98rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .glass-card,
+      .chart-card {
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">InsurEdge</div>
+    <div class="nav-links">
+      <a href="#summary">Summary</a>
+      <a href="#resources">Resources</a>
+      <a href="#charts">Analytics</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>AI-Powered <span>Parametric Insurance</span><br>for Gig Workers</h1>
+      <p>
+        InsurEdge is a smart insurance platform designed to protect delivery riders from income loss caused by
+        weather, traffic, environmental disruptions, and real-world uncertainty using AI-driven
+        Risk, Premium, and Trust intelligence.
+      </p>
+      <div class="hero-buttons">
+        <a href="https://drive.google.com/file/d/1gQq_fCyr1RDJgO6xKXXXibdV99L9PWsM/view?usp=drivesdk" target="_blank" class="btn btn-primary">Open Application</a>
+        <a href="https://github.com/AadityaTiwary1/InsurEdge" target="_blank" class="btn btn-secondary">View GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="summary">
+    <h2 class="section-title">Project Summary</h2>
+    <p class="section-subtitle">A short overview of what InsurEdge solves and why it matters.</p>
+    <div class="glass-card summary-box">
+      InsurEdge was built to solve a very practical problem: gig workers often lose income due to factors that are completely outside their control.
+      Heavy rainfall, extreme traffic, pollution, and area restrictions can reduce their working hours and earnings instantly.
+      This project introduces an AI-powered parametric insurance approach where machine learning models help predict disruption risk,
+      personalize weekly premiums, evaluate rider trustworthiness, and support automated, fraud-resistant payout decisions.
+      Instead of treating insurance as a manual process, InsurEdge reimagines it as a smarter, faster, and more adaptive protection system.
+    </div>
+  </section>
+
+  <section class="section" id="resources">
+    <h2 class="section-title">Project Resources</h2>
+    <p class="section-subtitle">Everything related to the project in one place — datasets, application, and documentation.</p>
+
+    <div class="glass-grid">
+      <div class="glass-card link-box">
+        <h3>📂 Risk Score Model Dataset</h3>
+        <p>This dataset is used to train the risk prediction model based on disruption-related patterns such as weather and traffic exposure.</p>
+        <br>
+        <a href="#" target="_blank">Add your Risk Model Dataset Link Here</a>
+      </div>
+
+      <div class="glass-card link-box">
+        <h3>📂 Trust Score Model Dataset</h3>
+        <p>This dataset supports trust analysis by learning rider reliability patterns, claims behavior, and premium-related consistency.</p>
+        <br>
+        <a href="#" target="_blank">Add your Trust Model Dataset Link Here</a>
+      </div>
+
+      <div class="glass-card link-box">
+        <h3>📱 Application Access</h3>
+        <p>Open the working application build of InsurEdge and explore the project experience directly.</p>
+        <br>
+        <a href="https://drive.google.com/file/d/1gQq_fCyr1RDJgO6xKXXXibdV99L9PWsM/view?usp=drivesdk" target="_blank">Open Application</a>
+      </div>
+
+      <div class="glass-card link-box">
+        <h3>📘 Project Explanation</h3>
+        <p>Read the full project documentation, architecture, README, and implementation details on GitHub.</p>
+        <br>
+        <a href="https://github.com/AadityaTiwary1/InsurEdge" target="_blank">View GitHub Repository</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="charts">
+    <h2 class="section-title">Model Insights</h2>
+    <p class="section-subtitle">Visual representation of how InsurEdge interprets risk, premium, and trust intelligence.</p>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Risk Distribution</h3>
+        <canvas id="riskChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>Weekly Premium Levels</h3>
+        <canvas id="premiumChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>Trust Score Overview</h3>
+        <canvas id="trustChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <h2 class="section-title">About InsurEdge</h2>
+    <p class="section-subtitle">Why the project was built and what makes it different.</p>
+
+    <div class="glass-grid">
+      <div class="glass-card">
+        <h3>Why It Was Built</h3>
+        <p>
+          InsurEdge was inspired by the everyday uncertainty faced by gig workers. Delivery riders often lose income
+          because of external disruptions, yet they usually have no structured financial protection. This project was
+          created to explore how AI and insurance logic can be combined to build something more practical and fair.
+        </p>
+      </div>
+
+      <div class="glass-card">
+        <h3>What Makes It Unique</h3>
+        <p>
+          The project goes beyond a single prediction model. It combines a Risk Score Model, Premium Prediction Model,
+          Trust Score Model, and fraud-aware decision logic to create a connected insurance intelligence system rather
+          than a basic ML demo.
+        </p>
+      </div>
+
+      <div class="glass-card">
+        <h3>Core Vision</h3>
+        <p>
+          At its heart, InsurEdge focuses on protecting income instead of only insuring physical assets. It is built
+          around the idea that vulnerable workers should have access to fast, data-driven, and fair financial protection.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 InsurEdge • Built for smarter, fairer insurance intelligence</p>
+  </footer>
+
+  <script>
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            color: '#e2e8f0',
+            font: {
+              family: 'Poppins'
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#cbd5e1' },
+          grid: { color: 'rgba(255,255,255,0.08)' }
+        },
+        y: {
+          ticks: { color: '#cbd5e1' },
+          grid: { color: 'rgba(255,255,255,0.08)' }
+        }
+      }
+    };
+
+    new Chart(document.getElementById('riskChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Low Risk', 'Medium Risk', 'High Risk'],
+        datasets: [{
+          data: [35, 40, 25],
+          backgroundColor: ['#38bdf8', '#a78bfa', '#f472b6'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: {
+              color: '#e2e8f0',
+              font: { family: 'Poppins' }
+            }
+          }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('premiumChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Low Risk', 'Medium Risk', 'High Risk'],
+        datasets: [{
+          label: 'Weekly Premium (₹)',
+          data: [25, 35, 48],
+          backgroundColor: ['#38bdf8', '#8b5cf6', '#f472b6'],
+          borderRadius: 12
+        }]
+      },
+      options: chartOptions
+    });
+
+    new Chart(document.getElementById('trustChart'), {
+      type: 'line',
+      data: {
+        labels: ['Rider A', 'Rider B', 'Rider C', 'Rider D', 'Rider E'],
+        datasets: [{
+          label: 'Trust Score',
+          data: [88, 72, 60, 91, 48],
+          borderColor: '#38bdf8',
+          backgroundColor: 'rgba(56, 189, 248, 0.15)',
+          fill: true,
+          tension: 0.35,
+          pointBackgroundColor: '#ffffff',
+          pointRadius: 5
+        }]
+      },
+      options: chartOptions
+    });
+  </script>
+
+</body>
+</html>
