@@ -466,18 +466,18 @@ InsurEdge is built as a layered system where each layer has a clearly defined re
 │                        BACKEND LAYER                        │
 │                    FastAPI (Python)                         │
 │                                                             │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
-│  │ Risk Score  │  │ Trust Score │  │   Premium Engine    │ │
-│  │   Service   │  │   Service   │  │      Service        │ │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘ │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │ Risk Score  │  │ Trust Score │  │   Premium Engine    │  │
+│  │   Service   │  │   Service   │  │      Service        │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
 │                                                             │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │         Trigger Monitoring + Fraud Detection        │   │
-│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │         Trigger Monitoring + Fraud Detection        │    │
+│  └─────────────────────────────────────────────────────┘    │
 │                                                             │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              Payout Calculation Engine              │   │
-│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │              Payout Calculation Engine              │    │
+│  └─────────────────────────────────────────────────────┘    │
 └───────────┬──────────────────────────┬──────────────────────┘
             │                          │
 ┌───────────▼──────────┐  ┌────────────▼────────────────────┐
@@ -489,6 +489,9 @@ InsurEdge is built as a layered system where each layer has a clearly defined re
 │  Model Outputs       │  └─────────────────────────────────┘
 └──────────────────────┘
 ```
+<p align="center">
+  <img src="System_Architecture.png" width="750"/>
+</p>
 
 **Frontend:** Flutter is used to deliver a consistent experience across web and Android from a single codebase. The UI is deliberately simple — riders should be able to understand their risk score, trust score, and weekly premium in under 30 seconds of use. All complexity is in the backend; none of it is pushed onto the rider.
 
