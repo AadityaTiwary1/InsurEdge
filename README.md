@@ -1,523 +1,322 @@
-# MARKET CRASH DISCUSSED AT THE END.
+# InsurEdge 🛵⚡
+### AI-Powered Parametric Micro-Insurance for Gig Workers
 
-# InsurEdge – AI Powered Parametric Insurance for Gig Workers
+> Protecting delivery riders from income loss caused by disruptions they never saw coming — and never caused.
+
+---
+
+## Table of Contents
+1. [Overview](#overview)
+2. [Problem Statement](#problem-statement)
+3. [How It Works](#how-it-works)
+4. [AI Models](#ai-models)
+   - [Risk Score Model](#1-risk-score-model)
+   - [Trust Score Model](#2-trust-score-model)
+   - [Dynamic Premium Model](#3-dynamic-premium-model-planned)
+5. [Disruption Factor Coverage](#disruption-factor-coverage)
+6. [Parametric Trigger System](#parametric-trigger-system)
+7. [Fraud & Market Crash Defense](#fraud--market-crash-defense)
+8. [System Architecture](#system-architecture)
+9. [Tech Stack](#tech-stack)
+10. [Datasets](#datasets)
+11. [Repo Structure](#repo-structure)
+12. [Future Scope](#future-scope)
+
+---
 
 ## Overview
 
-InsurEdge is an AI-enabled parametric insurance platform designed to protect gig economy delivery workers from income loss caused by external disruptions such as extreme weather, pollution, or local restrictions.
+**InsurEdge** is a parametric micro-insurance platform built specifically for gig economy delivery workers. It monitors real-world disruption conditions, predicts rider risk, evaluates behavioral trust, and processes compensation automatically — with no manual claim filing.
 
-Delivery partners rely heavily on daily working hours to earn income, and unexpected environmental or social disruptions can significantly reduce their weekly earnings. InsurEdge provides automated insurance coverage that detects disruptions using real-world data and triggers payouts automatically.
+The platform serves riders on **Swiggy, Zomato, Blinkit, and Zepto** whose weekly earnings collapse during events completely outside their control: floods, extreme heat, riots, zone shutdowns, or infrastructure failures.
 
-Unlike traditional insurance systems that require manual claim submission and verification, InsurEdge follows a parametric model where predefined triggers activate compensation automatically.
-
-The system focuses strictly on income protection and excludes coverage for health, life, accidents, or vehicle repairs.
+| Field | Details |
+|---|---|
+| Insurance Type | Weekly parametric micro-insurance |
+| Claim Mechanism | Automated — no manual filing required |
+| Core Intelligence | Risk Score · Trust Score · Dynamic Premium · Fraud Detection |
+| Primary Users | Gig delivery workers in urban India |
 
 ---
 
 ## Problem Statement
 
-Gig workers such as food delivery riders depend on consistent working hours to maintain their weekly income. However, disruptions like heavy rainfall, flooding, extreme heat, severe pollution, or local restrictions can reduce their ability to work, causing significant income loss.
+Delivery riders earn based on hours worked and orders completed. Dozens of external disruptions can erase a week's earnings in hours — and today, riders have zero financial protection against any of them.
 
-Currently, gig workers have no protection against these uncontrollable events, leaving them financially vulnerable. InsurEdge aims to address this gap by creating an automated parametric insurance system that provides financial protection when such disruptions occur.
+**InsurEdge closes this gap** with a system that detects disruptions, validates them against real data, and pays out fairly and automatically.
 
----
-
-## Target Persona
-
-### Food Delivery Riders
-
-Platforms:
-
-* Swiggy
-* Zomato
-* Blinkit
-* Zepto
-
-### Characteristics
-
-* Income depends on number of deliveries completed
-* Works outdoors for long hours
-* Highly impacted by environmental disruptions
-* Primarily uses smartphones for work
-* Prefers simple and fast mobile interfaces
-
-### Example Scenario
-
-Rahul is a delivery rider working with Swiggy in Mumbai. On a particular day, heavy rainfall floods roads and restaurants close early. As a result, Rahul loses several hours of work and earns significantly less that week.
-
-With InsurEdge, the system automatically detects heavy rainfall in Rahul's delivery zone, verifies the disruption, and calculates the income loss. The compensation is added to his weekly payout automatically without requiring any manual claim.
+| Disruption Category | Example | Current Protection |
+|---|---|---|
+| Weather | Heavy rainfall, flooding | None |
+| Environmental | Hazardous AQI, extreme heat | None |
+| Civil unrest | Protests, riots, curfews | None |
+| Conflict / Security | Military operations, border incidents, strikes | None |
+| Infrastructure | Power outages, road collapses | None |
+| Traffic | Severe congestion, accidents | None |
+| Platform | Delivery zone shutdowns | None |
 
 ---
 
-## Application Workflow
+## How It Works
 
-### 1. User Onboarding
+InsurEdge runs a continuous intelligence pipeline across four stages:
 
-The delivery partner registers using the mobile application and provides basic details such as:
+```
+Rider Onboarding
+       ↓
+Risk Score Prediction  ←  Environmental + Road Accident Data
+       ↓
+Trust Score Evaluation ←  Insurance Claim Behavior Data
+       ↓
+Premium Calculation    ←  Risk + Trust + Exposure
+       ↓
+Live Trigger Monitoring ← Weather / AQI / Traffic / Civil APIs
+       ↓
+Fraud & Anomaly Checks
+       ↓
+Automated Payout
+```
 
-* Name
-* Delivery platform
-* Working city or zone
-* Average daily working hours
-
-The system then generates a weekly insurance plan for the rider.
-
----
-
-### 2. AI Risk Assessment
-
-The system analyzes multiple risk factors including:
-
-* Historical weather disruptions
-* Pollution levels
-* City risk index
-* Delivery activity density
-* Rider working patterns
-
-Based on these inputs, an AI model calculates the weekly premium dynamically.
+Every stage is data-driven. No human approver sits in the critical path for routine claims.
 
 ---
 
-### 3. Real-Time Trigger Monitoring
+## AI Models
 
-InsurEdge continuously monitors external data sources through APIs including:
+### 1. Risk Score Model
 
-* Weather conditions
-* Air Quality Index
-* Traffic disruptions
-* Local restrictions
+**Purpose:** Predict how dangerous a rider's working environment is on a 0–100 scale.
 
-If predefined thresholds are exceeded, the system activates a parametric trigger.
+**Dataset:** [Indian Road Accident Dataset 2022–2025](https://www.kaggle.com/datasets/sehaj1104/indian-road-accident-dataset-20222025) (Kaggle)
 
----
+**Approach:** A composite risk score is engineered from accident-correlated features, then three regressors are trained and the best-performing model (by R²) is selected automatically.
 
-### 4. Automated Claim Validation
+| Model Tried | Metric Used for Selection |
+|---|---|
+| Random Forest Regressor | R², MAE, RMSE |
+| XGBoost Regressor | R², MAE, RMSE |
+| CatBoost Regressor | R², MAE, RMSE |
 
-Once a disruption trigger is detected:
+**Key Features Used:**
+- `traffic_density` — congestion level of working area
+- `weather` — rainfall intensity, fog, storm conditions
+- `visibility` — riding safety proxy
+- `accident_severity` — historical accident weight for the zone
 
-1. The system verifies the rider’s location and activity
-2. The disruption event is validated
-3. Estimated lost working hours are calculated
+**Output Labels:**
 
----
+| Score Range | Risk Category |
+|---|---|
+| 0 – 20 | Very Low Risk |
+| 21 – 40 | Low Risk |
+| 41 – 60 | Moderate Risk |
+| 61 – 80 | High Risk |
+| 81 – 100 | Severe Risk |
 
-### 5. Weekly Payout Processing
-
-All triggered disruptions during the week are aggregated. Compensation is calculated and transferred through a mock payment system once per week.
-
----
-
-## Weekly Premium Model
-
-InsurEdge operates on a weekly insurance pricing model designed to align with gig workers' earning cycles.
-
-Instead of long-term insurance commitments, workers subscribe to small weekly premiums that provide protection against income loss during disruptions.
-
-### Premium Calculation Factors
-
-* Location risk level
-* Historical weather disruptions
-* Pollution patterns
-* Average working hours
-* Delivery demand density
-
-### Example Pricing
-
-| City      | Risk Level | Weekly Premium |
-| --------- | ---------- | -------------- |
-| Bangalore | Low        | ₹25            |
-| Mumbai    | Medium     | ₹35            |
-| Delhi     | High       | ₹45            |
-
-This dynamic pricing ensures that workers only pay premiums proportional to their risk exposure.
+The risk score feeds directly into premium calculation and trigger sensitivity tuning.
 
 ---
 
-## Parametric Triggers
+### 2. Trust Score Model
 
-Parametric triggers define the environmental or social conditions that automatically activate insurance coverage.
+**Purpose:** Estimate how reliable a rider is as an insurance participant — distinguishing genuine users from those showing suspicious claim behavior.
 
-### Environmental Triggers
+**Dataset:** [Car Insurance Claim Prediction](https://www.kaggle.com/datasets/ifteshanajnin/carinsuranceclaimprediction-classification) (Kaggle)
 
-* Rainfall exceeding threshold levels
-* Heatwave alerts
-* Flood warnings
-* Severe AQI levels
+**Approach:** A **CatBoostClassifier** is trained to predict claim probability. Trust Score is derived as:
 
-### Social Triggers
+```
+Trust Score = (1 - Claim_Probability) × 100
+```
 
-* Local curfews
-* Delivery zone shutdowns
-* Restricted access areas
+**Output:**
 
-When these triggers occur within the rider’s working area, the system automatically activates protection and calculates compensation.
+| Trust Score | Label | Insurance Effect |
+|---|---|---|
+| 80 – 100 | High Trust | Fast-tracked payouts, stable premium |
+| 60 – 79 | Medium Trust | Standard processing |
+| 0 – 59 | Low Trust | Additional verification, higher premium band |
 
----
+**Premium Band Assignment (from Trust Score):**
 
-## AI and Machine Learning Integration
+```python
+if trust_score >= 80:   → "Low Premium"
+elif trust_score >= 60: → "Standard Premium"
+else:                   → "High Premium"
+```
 
-AI plays a central role in the InsurEdge platform.
-
-### AI Risk Assessment
-
-Machine learning models analyze historical disruption patterns to calculate dynamic weekly premiums for each user.
-
-Possible models include:
-
-* Random Forest
-* Regression models
-* Gradient boosting algorithms
+The trust score acts as a behavioral modifier layered on top of the environment-based risk score.
 
 ---
 
-### Fraud Detection
+### 3. Dynamic Premium Model *(Planned)*
 
-AI-based anomaly detection helps prevent fraudulent claims.
+The premium model will combine Risk Score + Trust Score + working hours + zone exposure into a single weekly premium figure. It replaces the flat-rate band system with a continuous regression output.
 
-Potential fraud scenarios include:
+| Input | Role |
+|---|---|
+| Risk Score (0–100) | Primary pricing driver |
+| Trust Score (0–100) | Behavioral adjustment |
+| Weekly Working Hours | Exposure duration |
+| Zone Type | Urban density multiplier |
+| Historical Disruption Rate | Area volatility |
 
-* GPS location spoofing
-* Duplicate claims
-* Claim attempts during inactive hours
-
-The system uses anomaly detection techniques and location validation to identify suspicious behavior.
-
----
-
-### Risk Prediction
-
-Predictive models analyze environmental trends to estimate the likelihood of disruptions such as extreme rainfall or pollution.
-
-This helps improve premium accuracy and strengthens the reliability of the insurance system.
+Estimated output range: ₹20 – ₹60/week based on synthetic simulations.
 
 ---
 
-## Platform Choice
+## Disruption Factor Coverage
 
-### Mobile Application
+InsurEdge is designed to scale beyond weather. The table below covers current triggers and planned expansions:
 
-The primary platform for InsurEdge will be a mobile application.
+### Currently Monitored
+| Factor | Data Source | Trigger Condition |
+|---|---|---|
+| Rainfall | Weather API | > threshold mm/hr |
+| Flooding | Flood alert APIs | Zone flood alert active |
+| AQI | AQI APIs | Hazardous AQI category |
+| Extreme Heat | Weather API | Temperature > 42°C |
+| Traffic Congestion | Maps / Traffic API | Severe congestion flag |
+| Delivery Zone Shutdown | Platform data (mock) | Inactivity detected |
 
-Reasons include:
+### Planned Expansions *(Future Scope)*
 
-* Delivery workers primarily operate using smartphones
-* Real-time location monitoring is easier on mobile devices
-* Push notifications allow immediate disruption alerts
-* Simpler interaction during work hours
+| Factor | Category | Implementation Plan |
+|---|---|---|
+| **War / Military Operations** | Conflict | Government alert APIs + district-level conflict feeds; trigger if rider's zone is under active security lockdown or curfew due to military activity |
+| **Riots & Civil Unrest** | Conflict | News sentiment APIs + police alert feeds; cluster detection for sudden same-area claim spikes |
+| **Strikes & Shutdowns** | Operational | Trade union / government public notices; manual whitelist of verified bandh events |
+| **Terrorist Incidents** | Security | National security alert APIs; geographic radius trigger around incident zone |
+| **Border Conflicts (Local)** | Security | Ministry of Home Affairs API feeds; affects riders in border district zones |
+| **Infrastructure Collapse** | Disaster | Road authority APIs; bridge closures, highway blocks |
+| **Power Grid Failures** | Infrastructure | State electricity board outage feeds; extended blackouts disrupting platform operations |
+| **Epidemic / Disease Outbreak** | Health | Health ministry alerts; localized lockdown or containment zone triggers |
+| **Earthquake / Natural Disaster** | Disaster | IMD + NDMA feeds; seismic or disaster zone classification |
+| **Political Rallies / VIP Movement** | Operational | Traffic authority notifications; route closures exceeding X hours |
 
-The user interface will prioritize simplicity and quick access to important information.
-
----
-
-## User Experience Design
-
-The application is designed for non-technical users who require a simple and intuitive interface.
-
-### Home Screen
-
-Displays:
-
-* Active insurance coverage
-* Weekly premium
-* Current protection status
-
----
-
-### Disruption Alerts
-
-Users receive real-time alerts when environmental disruptions activate insurance protection.
+> **Implementation Note:** Each new factor requires (a) a reliable real-time data source, (b) a validated threshold, and (c) an external-reality check to prevent fraudulent exploitation. New factors are only added to the trigger system once all three conditions are met.
 
 ---
 
-### Earnings Protection Dashboard
+## Parametric Trigger System
 
-Users can view:
+Unlike traditional insurance, InsurEdge does not ask riders to prove their loss. It verifies conditions against real data and activates payouts automatically.
 
-* Total protected income
-* Weekly compensation
-* Disruption events covered
+**A payout is triggered when:**
+1. A verified disruption event meets threshold conditions
+2. The rider was active / registered in the affected zone
+3. Trust Score passes minimum threshold
+4. No fraud signals are detected
 
----
-
-## Technology Stack
-
-### Frontend
-
-Mobile Application
-Flutter 
-
----
-
-### Backend
-
-FastAPI
-REST API architecture
+**A payout is held when:**
+- Trigger condition was not externally verifiable
+- Rider location data is inconsistent
+- Suspicious claim clustering is detected
+- Trust Score falls below the hold threshold
 
 ---
 
-### AI / ML
+## Fraud & Market Crash Defense
 
-Python
-Scikit-learn
-Pandas
-NumPy
+Parametric systems are attractive targets for coordinated fraud. InsurEdge defends against this with a multi-layer validation stack:
 
----
+| Threat | Defense Layer |
+|---|---|
+| GPS Spoofing | Location consistency checks against historical routes |
+| Mass Coordinated Claims | Cluster anomaly detection — sudden same-zone claim spikes |
+| Fake Disruption Claims | All triggers verified against external API data |
+| New Suspicious Accounts | Trust Score cold-start penalty |
+| Repeated Abuse Patterns | Trust Score decay on suspicious claim history |
 
-### APIs
+**Market Crash Scenario** (e.g. a fraud ring exploits a rain event):
 
-Weather Data – OpenWeather API
-Air Quality Data – AQICN API
-Location Services – Google Maps API
-
----
-
-### Database
-
-PostgreSQL or Supabase
-
----
-
-### Payment Simulation
-
-Razorpay Sandbox / 
-Stripe Test Mode
+```
+Suspicious cluster detected
+         ↓
+External weather API verification
+         ↓
+Individual trust scores checked
+         ↓
+Location history cross-referenced
+         ↓
+High-risk claims held for review
+Genuine riders paid normally
+```
 
 ---
 
 ## System Architecture
 
-<p align="center">
-  <img src="System_Architecture.png" width="750"/>
-</p>
+```
+┌─────────────────────────────────────────────┐
+│                  Frontend                   │
+│           Flutter Web / Android             │
+└────────────────────┬────────────────────────┘
+                     │
+┌────────────────────▼────────────────────────┐
+│                   Backend                   │
+│                  FastAPI                    │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
+│  │   Risk   │  │  Trust   │  │ Premium  │  │
+│  │  Model   │  │  Model   │  │  Model   │  │
+│  └──────────┘  └──────────┘  └──────────┘  │
+│         ┌───────────────────────┐           │
+│         │  Fraud / Trigger Engine│          │
+│         └───────────────────────┘           │
+└──────┬─────────────────────┬────────────────┘
+       │                     │
+┌──────▼──────┐     ┌────────▼────────────┐
+│  Supabase   │     │   External APIs     │
+│ PostgreSQL  │     │ Weather · AQI       │
+│  (Storage)  │     │ Traffic · Maps      │
+└─────────────┘     │ Alert Feeds (future)│
+                    └─────────────────────┘
+```
 
 ---
 
-## Development Plan
+## Tech Stack
 
-### Phase 1 – Research and Planning
-
-* Define user persona and problem scope
-* Design system architecture
-* Create workflow documentation
-* Design prototype user interface
-
----
-
-### Phase 2 – MVP Development
-
-The minimum viable product will include:
-
-* User registration
-* Insurance policy management
-* Dynamic premium calculation
-* Parametric trigger detection
-* Automated claim processing
+| Layer | Technology |
+|---|---|
+| Frontend | Flutter |
+| Backend | FastAPI (Python) |
+| Database | Supabase / PostgreSQL |
+| ML Development | Python, Google Colab |
+| ML Models | CatBoost, XGBoost, Random Forest |
+| ML Libraries | Pandas, NumPy, Scikit-learn, Joblib |
+| Visualization | Matplotlib, Seaborn |
+| Deployment | Vercel (frontend) + cloud backend |
+| External APIs | OpenWeatherMap, AQI APIs, Google Maps |
+| Payments (Mock) | Razorpay Sandbox |
 
 ---
 
-### Phase 3 – Advanced Features
+## Datasets
 
-The final stage will include:
-
-* AI-based fraud detection
-* Instant payout simulation
-* Intelligent analytics dashboard
-* Predictive disruption analysis
-
----
-
-## MARKET CRASH - 1
-
-## Adversarial Defense & Anti-Spoofing Strategy
-
-### The Market Crash Scenario
-
-It starts quietly.
-
-A sudden spike in claims.
-Hundreds of partners involved in delivery report similar disruptions simultaneously.
-
-On the surface, it appears real — maybe heavy rain, maybe a local shutdown.
-But something feels off.
-
-500 riders.
-Same locations.
-Impeccably synchronized claims.
-
-This isn’t a disruption.
-It is a payout-draining GPS spoofing fraud ring.
-
-And this is exactly the kind of situation that **InsurEdge** is designed to handle.
+| Model | Dataset | Source |
+|---|---|---|
+| Risk Score | Indian Road Accident Dataset 2022–2025 | [Kaggle](https://www.kaggle.com/datasets/sehaj1104/indian-road-accident-dataset-20222025) |
+| Trust Score | Car Insurance Claim Prediction | [Kaggle](https://www.kaggle.com/datasets/ifteshanajnin/carinsuranceclaimprediction-classification) |
+| Premium Model *(planned)* | Synthetic + domain-derived | Internal generation |
+| Fraud Model *(planned)* | Anomaly / behavioral signals | Internal generation |
 
 ---
 
-### Step 1: Do Not Trust, Verify Everything
 
-A conventional system would trust GPS.
-InsurEdge does not.
+## Future Scope
 
-Instead of relying on a single signal, we build a **multi-source location verification system**:
-
-* Network location (cell tower / IP)
-* Device fingerprint
-* Historical movement patterns
-
-When a rider claims to be in a specific location, all signals must align within a defined threshold.
-
-If Server <-> Client shows Mumbai but network data indicates otherwise → **a flag is raised instantly**.
-
----
-
-### Step 2: Learn the Rider Before Judging the Claim
-
-Every genuine worker behaves in patterns.
-
-Over time, InsurEdge builds a **behavioral profile**:
-
-* Usual working hours
-* Frequent delivery zones
-* Average movement speed
-* Order activity rhythm
-
-Now consider a fraudster:
-
-* Suddenly appears in a new zone
-* No delivery history in that area
-* Claims disruption without prior activity
-* Shows unrealistic movement patterns
-
-This deviation is not random — it is detectable.
-
-Using anomaly detection, the system evaluates:
-
-> Does this behavior match the rider’s historical pattern?
-
-If not → **risk score increases**.
+| Feature | Description |
+|---|---|
+| War / Conflict Triggers | Integrate government & security alert APIs to trigger payouts in active conflict or curfew zones |
+| Epidemic Triggers | Health ministry feeds for containment zone detection |
+| Infrastructure Failure Triggers | Power grid and road authority outage APIs |
+| Risk Heatmaps | City-level disruption visualization for zone-aware pricing |
+| Explainability Layer | Per-rider explanation of why premium changed or claim was held |
+| Adaptive Fraud Intelligence | Online learning for evolving fraud patterns |
+| Multi-Platform Support | Expand beyond food delivery to cab, logistics, and field workers |
+| Instant Wallet Payouts | UPI-linked payout disbursement within hours of trigger |
 
 ---
 
-### Step 3: Capture the Network, Not Just the Individual
-
-Fraud at this scale is never an individual effort.
-
-InsurEdge analyzes **group behavior**.
-
-In this scenario:
-
-* Hundreds of users claim from nearly identical coordinates
-* Identical timing patterns
-* Similar device or network signatures
-* Claims from zones with no real disruption
-
-This creates a **cluster signature**.
-
-Instead of evaluating claims independently, InsurEdge identifies:
-
-> Are these users behaving like a coordinated system rather than independent workers?
-
-If yes → the system flags a **fraud ring**, not just individual users.
-
----
-
-### Step 4: External Data Reality Check
-
-Every claim must match real-world conditions.
-
-InsurEdge cross-verifies with:
-
-* Weather APIs
-* AQI levels
-* Traffic data
-* Local restriction alerts
-
-If users report heavy rain but weather data shows clear conditions, the system detects inconsistency immediately.
-
-This is the strongest filter:
-
-> No real-world disruption → No valid parametric trigger
-
----
-
-### Step 5: Risk Scoring Instead of Binary Decisions
-
-InsurEdge does not rely on simple approval or rejection.
-
-Each claim is assigned a **dynamic fraud risk score** based on:
-
-* Location mismatch
-* Behavioral deviation
-* Cluster detection
-* External data inconsistency
-
-#### Decision Logic
-
-* Low Risk → Auto payout
-* Medium Risk → Delayed verification
-* High Risk → Flagged or blocked
-
-This ensures fraud prevention while avoiding unfair rejection of genuine users.
-
----
-
-### Step 6: Protect the Honest, Isolate the Fraud
-
-During a fraud spike, the system adapts in real time:
-
-* Suspicious clusters are isolated
-* Risk thresholds are temporarily tightened
-* High-risk zones undergo stricter validation
-
-Importantly:
-
-> Genuine users in the same area are not blindly blocked
-
-Their claims are validated individually using behavior, history, and real-world data.
-
-This ensures:
-
-* Fraud rings are stopped
-* Honest workers still receive payouts
-
----
-
-### Step 7: Build Long-Term Trust
-
-InsurEdge implements a **progressive trust model**:
-
-* Consistently legitimate users gain higher trust scores
-* Trusted users experience faster approvals
-* New or suspicious users face stricter validation
-
-Over time:
-
-* Genuine users enjoy seamless payouts
-* Fraudsters encounter increasing resistance
-
----
-## Flow of Steps
-
-<p align="center">
-  <img src="Market_Crash-1.png" width="750"/>
-</p>
-
----
-
-### Final Outcome
-
-In a Market Crash scenario:
-
-* The fraud ring is detected through cluster behavior and data inconsistencies
-* Fake claims are isolated before payouts
-* System liquidity is protected
-* Genuine stranded workers continue to receive compensation
-
-InsurEdge does not just verify claims.
-
-It understands **context, behavior, and patterns**.
-
-And that is how it answers the core question:
-
-> How do you differentiate between a fraudster and a genuinely stranded worker?
-
-By not relying on a single signal but by combining **data, behavior, and intelligence into one unified decision system**.
+> **InsurEdge** — Because gig workers shouldn't carry risks they didn't create.
