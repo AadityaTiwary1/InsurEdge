@@ -552,41 +552,6 @@ A strong project acknowledges what it cannot do yet rather than hiding gaps unde
 
 ---
 
-## 14. Repo Structure
-
-```
-InsurEdge/
-├── README.md
-│
-├── models/
-│   ├── Risk_Score.ipynb                  # Risk Score Model (RF + XGBoost + CatBoost comparison)
-│   ├── Trust_Score.ipynb                 # Trust Score Model (CatBoostClassifier)
-│   ├── premium_prediction.ipynb          # Dynamic Premium Model [planned]
-│   └── fraud_detection.ipynb             # Fraud Detection Model [planned]
-│
-├── saved_models/
-│   ├── insuredge_best_model.pkl          # Serialized best Risk Score model (auto-selected)
-│   └── insuredge_trust_score_model.pkl   # Serialized Trust Score pipeline
-│
-├── backend/
-│   ├── main.py                           # FastAPI entry point and router registration
-│   ├── routes/                           # API route handlers per service
-│   ├── services/                         # ML inference + trigger monitoring logic
-│   └── utils/                            # Shared utilities and helper functions
-│
-├── frontend/
-│   └── flutter_app/                      # Flutter web + Android application
-│
-├── docs/
-│   ├── architecture.png                  # System architecture diagram
-│   ├── workflow.png                      # End-to-end pipeline diagram
-│   └── trigger_logic.png                 # Trigger validation flow
-│
-└── requirements.txt
-```
-
----
-
 ## 15. Future Scope
 
 InsurEdge in its current form is an AI-backed MVP with two fully functional models and a clearly defined product architecture. The path from here to a full InsurTech platform involves three parallel expansion tracks.
