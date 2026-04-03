@@ -588,4 +588,3 @@ The most impactful near-term expansions are war/conflict triggers and infrastruc
 
 ---
 
-*Built as an AI + InsurTech research project focused on parametric micro-insurance for India's gig economy, with models trained on publicly available datasets from Kaggle. Dynamic Premium and Fraud Detection models are currently under active development.*
