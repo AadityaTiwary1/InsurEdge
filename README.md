@@ -37,7 +37,7 @@
 
 ## 1. Overview
 
-**InsurEdge** is an AI-powered parametric micro-insurance platform built specifically for gig economy delivery workers in India. It monitors real-world disruption conditions in near real-time, predicts how risky a rider's working environment is, evaluates each rider's behavioral trustworthiness from their insurance history, calculates a fair personalized weekly premium, and — when a genuine disruption strikes — processes compensation automatically without requiring the rider to file a single document.
+**InsurEdge** is an AI-powered parametric micro-insurance platform built specifically for gig economy delivery workers in India. It monitors real-world disruption conditions in near real-time, predicts how risky a rider's working environment is, evaluates each rider's behavioral trustworthiness from their insurance history, calculates a fair personalized weekly premium, and when a genuine disruption strikes processes compensation automatically without requiring the rider to file a single document.
 
 The core philosophy behind InsurEdge is simple: gig workers are not traditional employees. They have no HR department, no paid leave, no sick days, and no employer-backed insurance. When a city floods, when a riot breaks out, when the AQI hits a hazardous level — they lose income silently. Traditional insurance is too slow, too paperwork-heavy, and too expensive to serve workers earning ₹400–₹800 a day. InsurEdge is built from the ground up to fix this.
 
@@ -56,9 +56,9 @@ The platform targets riders working on **Swiggy, Zomato, Blinkit, and Zepto** �
 
 ## 2. Problem Statement
 
-India's gig economy employs over 7.7 million workers, with delivery being the largest segment. These workers operate entirely on a "no delivery, no pay" model. Their daily earnings are acutely sensitive to conditions outside their control — and those conditions are becoming more severe, more frequent, and more diverse with each passing year.
+India's gig economy employs over 7.7 million workers, with delivery being the largest segment. These workers operate entirely on a "no delivery, no pay" model. Their daily earnings are acutely sensitive to conditions outside their control and those conditions are becoming more severe, more frequent, and more diverse with each passing year.
 
-Consider a typical disruption week. Heavy pre-monsoon rainfall hits Mumbai. Restaurants reduce kitchen hours. Customers cancel orders. Traffic snarls make delivery windows impossible to meet. A rider who normally earns ₹700 a day earns ₹200. This continues for five days. At the end of the week, the rider has lost roughly ₹2,500 — and received nothing from anyone. No insurance. No platform support. No government aid. Nothing.
+Consider a typical disruption week. Heavy pre-monsoon rainfall hits Mumbai. Restaurants reduce kitchen hours. Customers cancel orders. Traffic snarls make delivery windows impossible to meet. A rider who normally earns ₹700 a day earns ₹200. This continues for five days. At the end of the week, the rider has lost roughly ₹2,500 and received nothing from anyone. No insurance. No platform support. No government aid. Nothing.
 
 Now extend this problem beyond weather. Curfews are imposed due to communal tensions. A major road collapses and cuts off a delivery zone for three days. A power grid failure shuts down restaurant POS systems across an area. A military operation near a border district locks down an entire city. In every one of these cases, the rider suffers, and the current system offers zero recourse.
 
@@ -82,7 +82,7 @@ InsurEdge directly addresses all of these gaps through a combination of AI predi
 
 To understand InsurEdge, it helps to understand what parametric insurance actually is and why it is the right model for gig workers.
 
-Traditional insurance works on an indemnity basis: something bad happens, you file a claim, an adjuster investigates, a decision is made, and eventually — weeks or months later — you may receive a payout. For a gig worker earning a few hundred rupees a day, this process is entirely unworkable. They cannot afford to wait. They cannot afford legal help if a claim is denied. They often lack the documentation to prove what they lost.
+Traditional insurance works on an indemnity basis: something bad happens, you file a claim, an adjuster investigates, a decision is made, and eventually weeks or months later you may receive a payout. For a gig worker earning a few hundred rupees a day, this process is entirely **unworkable.** They cannot afford to wait. They cannot afford legal help if a claim is denied. They often lack the documentation to prove what they lost.
 
 **Parametric insurance** works differently. Instead of compensating for a proven loss, it pays out when a predefined, measurable real-world condition is met. If rainfall in a zone exceeds X mm/hr for Y hours, a payout triggers. The rider does not need to prove anything. The real-world data proves it automatically.
 
@@ -99,7 +99,7 @@ This model is already proven in agriculture (crop failure), aviation (flight del
 
 ---
 
-## 4. How InsurEdge Works — End to End
+## 4. How InsurEdge Works (End to End)
 
 InsurEdge runs every rider through a continuous intelligence pipeline. Here is what happens from the moment a rider signs up to the moment a payout is processed:
 
@@ -153,7 +153,9 @@ InsurEdge runs every rider through a continuous intelligence pipeline. Here is w
                └─────────────────────┘                   └──────────────────────┘
 ```
 
-Every stage in this pipeline is observable and explainable. Riders can see their risk score, trust score, and the reason a claim was held or approved — making InsurEdge transparent by design, not just by intention.
+Every stage in this pipeline is observable and explainable. Riders can see their risk score, trust score, and the reason a claim was held or approved making InsurEdge transparent by design, not just by intention.
+
+This helps the gig workers understand why their scores have been high/low and work accordingly.
 
 ---
 
@@ -211,11 +213,11 @@ The risk score feeds directly into premium calculation and trigger sensitivity t
 
 **What it solves:** Even in a parametric system, not all riders should be treated identically. Some riders have long, consistent insurance histories with no anomalies. Others show patterns associated with fraud — excessive claim frequency, suspicious timing, or inconsistent behavior. The Trust Score Model quantifies this behavioral reliability on a 0–100 scale, giving the system a second evaluation axis independent of zone risk.
 
-**Why this matters:** A purely trigger-based system without trust evaluation is financially fragile. Anyone could activate a payout by being in the right place when a rain threshold is crossed. The Trust Score adds a behavioral verification dimension: even if the trigger is real, a rider with a very low trust score receives additional scrutiny before their payout is processed. Conversely, a high-trust rider benefits from faster approvals and stable pricing — a reward for consistent, genuine behavior.
+**Why this matters:** A purely trigger-based system without trust evaluation is financially fragile. Anyone could activate a payout by being in the right place when a rain threshold is crossed. The Trust Score adds a behavioral verification dimension: even if the trigger is real, a rider with a very low trust score receives additional scrutiny before their payout is processed. Conversely, a high-trust rider benefits from faster approvals and stable pricing and a reward for consistent, genuine behavior.
 
-**Dataset Used:** [Car Insurance Claim Prediction](https://www.kaggle.com/datasets/ifteshanajnin/carinsuranceclaimprediction-classification) — a Kaggle classification dataset containing insurance policyholder attributes and whether they made a claim. While this is car insurance rather than gig insurance, the behavioral signals it captures — policyholder profile, subscription patterns, vehicle attributes, historical claim behavior — closely mirror what InsurEdge needs to evaluate rider insurance behavior. Claim-making behavior is consistent across insurance domains: the features that predict a likely car insurance claimant are meaningfully correlated with the features that predict an insurance risk in gig platforms. This is an appropriate proxy given the absence of a real gig-insurance dataset of comparable scale.
+**Dataset Used:** [Car Insurance Claim Prediction](https://www.kaggle.com/datasets/ifteshanajnin/carinsuranceclaimprediction-classification) — a Kaggle classification dataset containing insurance policyholder attributes and whether they made a claim. While this is car insurance rather than gig insurance, the behavioral signals it captures — policyholder profile, subscription patterns, vehicle attributes, historical claim behavior that closely mirrorers what InsurEdge needs to evaluate rider insurance behavior. Claim-making behavior is consistent across insurance domains: the features that predict a likely car insurance claimant are meaningfully correlated with the features that predict an insurance risk in gig platforms. This is an appropriate proxy given the absence of a real gig-insurance dataset of comparable scale.
 
-**Model Architecture:** A **CatBoostClassifier** is trained to predict the binary outcome — whether a policyholder made a claim or not. CatBoost is particularly well-suited here because the dataset contains a mix of numerical and categorical features, and CatBoost handles categorical encoding internally without requiring manual preprocessing. The model is wrapped in a full `sklearn` Pipeline with `StandardScaler` for numerical features and `OneHotEncoder` for categorical features, making the entire preprocessing and inference chain deployable as a single serialized object.
+**Model Architecture:** A **CatBoostClassifier** is trained to predict the binary outcome of whether a policyholder made a claim or not. CatBoost is particularly well-suited here because the dataset contains a mix of numerical and categorical features, and CatBoost handles categorical encoding internally without requiring manual preprocessing. The model is wrapped in a full `sklearn` Pipeline with `StandardScaler` for numerical features and `OneHotEncoder` for categorical features, making the entire preprocessing and inference chain deployable as a single serialized object.
 
 **Trust Score Derivation:** Once the classifier is trained, we do not use the binary prediction directly — a hard yes/no on "will this rider commit fraud" would be both too blunt and too easily gamed. Instead, we use the model's **predicted claim probability** and invert it to produce a continuous trust signal:
 
@@ -241,7 +243,7 @@ This means a rider the model believes has only a 10% chance of making a suspicio
 
 **What it will solve:** The current premium system assigns riders to one of three bands (Low / Standard / High) based on their Trust Score. This works as an MVP but is coarse. Two riders can have the same Trust Score but wildly different risk environments — a High Trust rider working 70 hours a week in a flood-prone zone should not pay the same premium as a High Trust rider working 30 hours in a stable zone. The Dynamic Premium Model replaces the band system with a continuous regression output — a precise weekly rupee figure calculated from the full combination of risk, trust, exposure, and zone characteristics.
 
-**Why this upgrade matters:** Dynamic pricing is what makes InsurEdge financially sustainable at scale. If high-risk zones are underpriced, the claim pool runs dry during heavy monsoon months. If low-risk zones are overpriced, riders churn off the platform. Getting pricing right at the individual level — not just at a coarse category level — is what allows InsurEdge to operate profitably while remaining affordable for every rider.
+**Why this upgrade matters:** Dynamic pricing is what makes InsurEdge financially sustainable at scale. If high-risk zones are underpriced, the claim pool runs dry during heavy monsoon months. If low-risk zones are overpriced, riders churn off the platform. Getting pricing right at the individual level and not just at a coarse category level that is what allows InsurEdge to operate profitably while remaining affordable for every rider.
 
 **Planned Input Features:**
 
@@ -260,7 +262,7 @@ This means a rider the model believes has only a 10% chance of making a suspicio
 
 ### 5.4 How the Models Work Together
 
-The three models are not independent modules — they form a pipeline where each model's output informs the next, and where the combination produces decisions that are better than any single model could achieve alone.
+The three models are not independent modules but they form a pipeline where each model's output informs the next, and where the combination produces decisions that are better than any single model could achieve alone.
 
 ```
 Environmental & Road Accident Data
@@ -300,7 +302,7 @@ One of InsurEdge's most deliberate design decisions is treating disruption as a 
 
 ### Currently Monitored
 
-These triggers are active in the current system. Before any payout is initiated, conditions are verified against real-time external APIs — not just checked once but confirmed to have persisted above threshold for a minimum duration window.
+These triggers are active in the current system. Before any payout is initiated, conditions are verified against real-time external APIs which are not just checked once but confirmed to have persisted above threshold for a minimum duration window.
 
 | Factor | Data Source | Trigger Condition | Why It Matters for Riders |
 |---|---|---|---|
@@ -313,7 +315,7 @@ These triggers are active in the current system. Before any payout is initiated,
 
 ### Planned Expansions
 
-Each category below requires a reliable, verifiable real-time data source before being added as a live trigger. InsurEdge will not add a trigger without external verification capability — doing so would make the system trivially exploitable by anyone who knows the trigger conditions.
+Each category below requires a reliable, verifiable real-time data source before being added as a live trigger. InsurEdge will not add a trigger without external verification capability and by doing so it would make the system trivially exploitable by anyone who knows the trigger conditions.
 
 | Factor | Category | How It Affects Riders | Implementation Plan |
 |---|---|---|---|
@@ -491,7 +493,7 @@ InsurEdge is built as a layered system where each layer has a clearly defined re
   <img src="System_Architecture.png" width="750"/>
 </p>
 
-**Frontend:** Flutter is used to deliver a consistent experience across web and Android from a single codebase. The UI is deliberately simple — riders should be able to understand their risk score, trust score, and weekly premium in under 30 seconds of use. All complexity is in the backend; none of it is pushed onto the rider.
+**Frontend:** Flutter is used to deliver a consistent experience across web and Android from a single codebase. The UI is deliberately simple the riders should be able to understand their risk score, trust score, and weekly premium in under 30 seconds of use. All complexity is in the backend; none of it is pushed onto the rider.
 
 **Backend:** FastAPI is chosen for its Python-native ecosystem (matching the ML stack perfectly), its automatic OpenAPI documentation, and its async capabilities which are critical for polling multiple external APIs simultaneously during trigger monitoring. Each AI model runs as a separate service behind the FastAPI router, so models can be retrained and redeployed independently without touching the rest of the system.
 
