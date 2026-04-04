@@ -104,7 +104,7 @@ This model is already proven in agriculture (crop failure), aviation (flight del
 InsurEdge runs every rider through a continuous intelligence pipeline. Here is what happens from the moment a rider signs up to the moment a payout is processed:
 
 <p align="center">
-  <img src="imgs/Workflow.png" width="750"/>
+  <img src="imgs/Workflow.png" width="1000"/>
 </p>
 
 Every stage in this pipeline is observable and explainable. Riders can see their risk score, trust score, and the reason a claim was held or approved making InsurEdge transparent by design, not just by intention.
@@ -246,7 +246,7 @@ Environmental & Road Accident Data
     └─────────────────┘
 ```
 <p align="center">
-  <img src="imgs/Models_Workflow.png" width="750"/>
+  <img src="imgs/Models_Workflow.png" width="1000"/>
 </p>
 
 A rider in a Severe Risk zone with a High Trust Score pays more than a Low Risk zone rider, but gets faster claim approvals. A rider with a Low Trust Score in a Low Risk zone still gets coverage, but at a higher premium and with additional claim scrutiny. The combination produces outcomes that are simultaneously fairer to individuals, more resistant to fraud, and more financially sustainable for the platform than any single-axis approach.
@@ -417,7 +417,7 @@ InsurEdge is built as a layered system where each layer has a clearly defined re
 └──────────────────────┘
 ```
 <p align="center">
-  <img src="imgs/System_Architecture.png" width="750"/>
+  <img src="imgs/System_Architecture.png" width="1000"/>
 </p>
 
 **Frontend:** Flutter is used to deliver a consistent experience across web and Android from a single codebase. The UI is deliberately simple the riders should be able to understand their risk score, trust score, and weekly premium in under 30 seconds of use. All complexity is in the backend; none of it is pushed onto the rider.
