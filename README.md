@@ -103,55 +103,9 @@ This model is already proven in agriculture (crop failure), aviation (flight del
 
 InsurEdge runs every rider through a continuous intelligence pipeline. Here is what happens from the moment a rider signs up to the moment a payout is processed:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  STAGE 1: Rider Onboarding                                  │
-│  Rider provides work location, zone, platform, hours/week   │
-└──────────────────────────────┬──────────────────────────────┘
-                               │
-┌──────────────────────────────▼──────────────────────────────┐
-│  STAGE 2: Risk Score Prediction                             │
-│  Environmental + road accident data analyzed for the zone   │
-│  Output: Risk Score 0–100 + Risk Category                   │
-└──────────────────────────────┬──────────────────────────────┘
-                               │
-┌──────────────────────────────▼──────────────────────────────┐
-│  STAGE 3: Trust Score Evaluation                            │
-│  Insurance claim behavior data analyzed                     │
-│  Output: Trust Score 0–100 + Premium Band                   │
-└──────────────────────────────┬──────────────────────────────┘
-                               │
-┌──────────────────────────────▼──────────────────────────────┐
-│  STAGE 4: Premium Calculation                               │
-│  Risk Score + Trust Score + Zone + Hours → Weekly Premium   │
-└──────────────────────────────┬──────────────────────────────┘
-                               │
-┌──────────────────────────────▼──────────────────────────────┐
-│  STAGE 5: Live Trigger Monitoring                           │
-│  Weather · AQI · Traffic · Civil · Alert APIs checked       │
-│  continuously against the rider's active zone               │
-└──────────────────────────────┬──────────────────────────────┘
-                               │
-              ┌────────────────┴────────────────┐
-              │                                 │
-   ┌──────────▼──────────┐          ┌───────────▼─────────┐
-   │  No Trigger Hit     │          │  Trigger Condition  │
-   │  Continue Monitoring│          │  Threshold Crossed  │
-   └─────────────────────┘          └───────────┬─────────┘
-                                                │
-                               ┌────────────────▼────────────────┐
-                               │  STAGE 6: Fraud & Trust Checks  │
-                               │  Location · Cluster · Trust ·   │
-                               │  Behavioral Anomaly Detection    │
-                               └────────────────┬────────────────┘
-                                                │
-                          ┌─────────────────────┴─────────────────────┐
-                          │                                            │
-               ┌──────────▼──────────┐                   ┌────────────▼─────────┐
-               │  Checks Pass        │                   │  Suspicious Signals  │
-               │  Auto Payout        │                   │  Hold for Review     │
-               └─────────────────────┘                   └──────────────────────┘
-```
+<p align="center">
+  <img src="imgs/Workflow.png" width="750"/>
+</p>
 
 Every stage in this pipeline is observable and explainable. Riders can see their risk score, trust score, and the reason a claim was held or approved making InsurEdge transparent by design, not just by intention.
 
@@ -291,6 +245,9 @@ Environmental & Road Accident Data
     │  Fraud Engine   │  Output: Approve / Hold / Reject
     └─────────────────┘
 ```
+<p align="center">
+  <img src="imgs/Models_Workflow.png" width="750"/>
+</p>
 
 A rider in a Severe Risk zone with a High Trust Score pays more than a Low Risk zone rider, but gets faster claim approvals. A rider with a Low Trust Score in a Low Risk zone still gets coverage, but at a higher premium and with additional claim scrutiny. The combination produces outcomes that are simultaneously fairer to individuals, more resistant to fraud, and more financially sustainable for the platform than any single-axis approach.
 
@@ -422,6 +379,9 @@ Release held          Flag accounts
 claims gradually      for investigation,
                       block payouts
 ```
+<p align="center">
+  <img src="imgs/Market_Crash.png" width="750"/>
+</p>
 
 This design ensures that even during a coordinated attack, genuine riders in genuinely disrupted zones receive their payouts — with a slight delay during the review process. The system is designed to protect legitimate users first, and protect itself second.
 
