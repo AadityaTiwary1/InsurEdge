@@ -346,39 +346,6 @@ The biggest systemic vulnerability in any parametric insurance product is coordi
 
 When InsurEdge detects a potential coordinated fraud event, it does not shut down payouts entirely — which would harm genuine riders who deserve compensation. Instead, it applies a tiered response that separates genuine riders from suspicious actors:
 
-```
-Mass claim spike detected in Zone X
-              │
-              ▼
-External trigger independently verified? ── NO ──► Reject entire batch
-              │
-             YES
-              │
-              ▼
-Individual trust scores evaluated per rider
-              │
-    ┌─────────┴──────────┐
-  HIGH TRUST          LOW/MEDIUM TRUST
-    │                    │
-    ▼                    ▼
-Auto-approve          Hold for
-genuine riders        verification
-              │
-              ▼
-Cluster analysis: Are individual claim
-patterns consistent with a real disruption,
-or do they show coordinated spoofing signatures?
-              │
-    ┌─────────┴──────────┐
-CONSISTENT            COORDINATED
-WITH REAL             SPOOFING
-DISRUPTION            SIGNATURES
-    │                    │
-    ▼                    ▼
-Release held          Flag accounts
-claims gradually      for investigation,
-                      block payouts
-```
 <p align="center">
   <img src="imgs/Market_Crash.png" width="750"/>
 </p>
