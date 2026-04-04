@@ -9,7 +9,6 @@
 [![Supabase](https://img.shields.io/badge/Database-Supabase-3ECF8E?logo=supabase)](https://supabase.com)
 [![CatBoost](https://img.shields.io/badge/ML-CatBoost-yellow)](https://catboost.ai)
 [![XGBoost](https://img.shields.io/badge/ML-XGBoost-orange)](https://xgboost.readthedocs.io)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
@@ -32,8 +31,7 @@
 11. [Tech Stack](#11-tech-stack)
 12. [Datasets](#12-datasets)
 13. [Challenges & Honest Limitations](#13-challenges--honest-limitations)
-14. [Repo Structure](#14-repo-structure)
-15. [Future Scope](#15-future-scope)
+14. [Future Scope](#15-future-scope)
 
 ---
 
