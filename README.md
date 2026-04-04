@@ -490,7 +490,7 @@ InsurEdge is built as a layered system where each layer has a clearly defined re
 └──────────────────────┘
 ```
 <p align="center">
-  <img src="/imgs/System_Architecture.png" width="750"/>
+  <img src="imgs/System_Architecture.png" width="750"/>
 </p>
 
 **Frontend:** Flutter is used to deliver a consistent experience across web and Android from a single codebase. The UI is deliberately simple the riders should be able to understand their risk score, trust score, and weekly premium in under 30 seconds of use. All complexity is in the backend; none of it is pushed onto the rider.
