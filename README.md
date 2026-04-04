@@ -347,7 +347,7 @@ The biggest systemic vulnerability in any parametric insurance product is coordi
 When InsurEdge detects a potential coordinated fraud event, it does not shut down payouts entirely — which would harm genuine riders who deserve compensation. Instead, it applies a tiered response that separates genuine riders from suspicious actors:
 
 <p align="center">
-  <img src="imgs/Market_Crash.png" width="750"/>
+  <img src="imgs/Market_Crash.png" width="900"/>
 </p>
 
 This design ensures that even during a coordinated attack, genuine riders in genuinely disrupted zones receive their payouts — with a slight delay during the review process. The system is designed to protect legitimate users first, and protect itself second.
